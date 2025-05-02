@@ -1,0 +1,28 @@
+version: "3"
+
+services:
+    simipa_docker_service:
+        build: .
+        container_name: simipa_docker
+        image: simipa_image
+        ports:
+            - 8001:80
+        env_file:
+            - .env
+        depends_on:
+            - mysql
+
+    mysql:
+        image: mysql:8.0
+        environment:
+            MYSQL_ROOT_PASSWORD: rootpassword
+            MYSQL_DATABASE: simipa_db
+            MYSQL_USER: admin
+            MYSQL_PASSWORD: admin123
+        ports:
+            - 8306:3306
+        volumes:
+            - simipa_database:/var/lib/mysql
+
+volumes:
+    simipa_database:

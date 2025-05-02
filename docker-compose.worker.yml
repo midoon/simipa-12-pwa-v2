@@ -1,0 +1,30 @@
+version: "3"
+
+services:
+  franken-docker-worker:
+    build:
+      dockerfile: worker.dockerfile
+      context: .
+    container_name: simipa_docker_worker
+    image: simipa_image_worker
+    ports:
+      - 8002:8000
+    env_file:
+      - .env
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: simpa_db
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin123
+    ports:
+      - 8306:3306
+    volumes:
+      - simipa_database:/var/lib/mysql
+
+volumes:
+  simipa_database:

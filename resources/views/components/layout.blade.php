@@ -7,10 +7,27 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @vite(['resources/js/app.js', 'resources/css/app.css'])
     <title>{{ $title }}</title>
+
+    {{-- manifest --}}
+    <link rel="manifest" href="/manifest.json" />
+    <!-- ios support -->
+    <link rel="apple-touch-icon" href="/images/icons/icon-96x96.png" />
+    <meta name="apple-mobile-web-app-status-bar" content="#ffffff" />
+    <meta name="theme-color" content="#ffffff" />
 </head>
 
 <body>
     {{ $slot }}
+
+
+    <script>
+        if ("serviceWorker" in navigator) {
+            navigator.serviceWorker
+                .register("/sw.js")
+                .then((res) => console.log("Service Worker Registered", res))
+                .catch((err) => console.log("Failed to register Service Worker", err));
+        }
+    </script>
 </body>
 
 </html>

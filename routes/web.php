@@ -22,8 +22,10 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return redirect('/teacher/login');
+    return view('auth.login_teacher');
 });
+
+Route::view('/offline', 'offline');
 
 Route::get('/helo', function () {
     return view('hello');

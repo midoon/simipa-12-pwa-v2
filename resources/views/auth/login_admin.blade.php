@@ -27,7 +27,7 @@
                 </form>
                 <div class="mt-8">
 
-                    <h3 class="text-simipa-2 text-center text-sm mt-5 hover:underline"><a href="/teacher/login">Login
+                    <h3 class="text-simipa-2 text-center text-sm mt-5 hover:underline"><a href="/">Login
                             sebagai
                             guru</a></h3>
                 </div>

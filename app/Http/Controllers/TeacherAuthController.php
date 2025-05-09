@@ -107,6 +107,6 @@ class TeacherAuthController extends Controller
         $request->session()->flush();
 
         // Redirect ke halaman login
-        return redirect('/teacher/login')->with('success', 'Anda berhasil logout');
+        return redirect('/')->with('success', 'Anda berhasil logout');
     }
 }

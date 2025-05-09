@@ -1,5 +1,7 @@
+const CACHE_NAME = "offline-v1";
+
 const preLoad = function () {
-    return caches.open("offline").then(function (cache) {
+    return caches.open(CACHE_NAME).then(function (cache) {
         // caching index and important routes
         return cache.addAll(filesToCache);
     });
@@ -33,7 +35,7 @@ const checkResponse = function (request) {
 };
 
 const addToCache = function (request) {
-    return caches.open("offline").then(function (cache) {
+    return caches.open(CACHE_NAME).then(function (cache) {
         return fetch(request).then(function (response) {
             return cache.put(request, response);
         });
@@ -41,7 +43,7 @@ const addToCache = function (request) {
 };
 
 const returnFromCache = function (request) {
-    return caches.open("offline").then(function (cache) {
+    return caches.open(CACHE_NAME).then(function (cache) {
         return cache.match(request).then(function (matching) {
             if (!matching || matching.status === 404) {
                 return cache.match("offline.html");
@@ -52,13 +54,30 @@ const returnFromCache = function (request) {
     });
 };
 
+self.addEventListener("activate", function (event) {
+    event.waitUntil(
+        caches.keys().then(function (keyList) {
+            return Promise.all(
+                keyList.map(function (key) {
+                    if (key !== CACHE_NAME) {
+                        return caches.delete(key);
+                    }
+                })
+            );
+        })
+    );
+});
+
 self.addEventListener("fetch", function (event) {
+    if (event.request.method !== "GET") return;
     event.respondWith(
         checkResponse(event.request).catch(function () {
             return returnFromCache(event.request);
         })
     );
-    if (!event.request.url.startsWith("http")) {
+
+    // cors filter
+    if (event.request.mode !== "cors" && event.request.url.startsWith("http")) {
         event.waitUntil(addToCache(event.request));
     }
 });

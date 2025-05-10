@@ -16,7 +16,7 @@ const filesToCache = [
     "/teacher/register",
     "/admin/login",
     "/teacher/schedule",
-    "/teacher/dashboard",
+
     "/offline.html",
     "/images/logo.png",
     "/images/offline.svg",

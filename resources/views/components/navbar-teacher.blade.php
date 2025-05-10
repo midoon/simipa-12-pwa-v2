@@ -2,7 +2,7 @@
     <nav class="bg-white sticky top-0 z-50 flex items-center justify-between  sm:flex sm:items-center ">
         <div class="max-w-7xl  flex gap-3 items-center px-4 py-3">
             <!-- Logo atau Nama -->
-            <a href="/teacher/dashboard" class="text-lg font-bold text-gray-700 hover:text-gray-900">
+            <a href="/" class="text-lg font-bold text-gray-700 hover:text-gray-900">
                 <img src="{{ asset('images/logo.png') }}" alt="logo.png" width="40" class="sm:w-[50px]">
             </a>
 

@@ -21,9 +21,7 @@ use App\Http\Middleware\TeacherMiddleware;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('auth.login_teacher');
-});
+Route::get('/', [TeacherController::class, 'index'])->middleware([TeacherMiddleware::class]);
 
 Route::view('/offline', 'offline');
 
@@ -128,7 +126,7 @@ Route::middleware([TeacherMiddleware::class])->group(function () {
     Route::delete('/teacher/logout', [TeacherAuthController::class, 'logout']);
 
     // Route
-    Route::get('/teacher/dashboard', [TeacherController::class, 'index']);
+    // Route::get('/teacher/dashboard', [TeacherController::class, 'index']);
     Route::get('/teacher/schedule', [TeacherController::class, 'showSchedule']);
 
     //Presensi

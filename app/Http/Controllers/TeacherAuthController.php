@@ -94,7 +94,7 @@ class TeacherAuthController extends Controller
             ];
 
             session(['teacher' => $userDataSession]);
-            return redirect('/teacher/dashboard');
+            return redirect('/');
         } catch (Exception $e) {
             return back()->withErrors(['error' => "Terjadi kesalahan saat login: {$e->getMessage()}"]);
         }
@@ -107,6 +107,6 @@ class TeacherAuthController extends Controller
         $request->session()->flush();
 
         // Redirect ke halaman login
-        return redirect('/')->with('success', 'Anda berhasil logout');
+        return redirect('/teacher/login')->with('success', 'Anda berhasil logout');
     }
 }

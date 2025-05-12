@@ -1,5 +1,8 @@
 UPCOMING FEATURE:
 - [admin] : on Delete Cascede with multi confirmation
 
+NEED IMPROVE:
+- security for https request meta tag: <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+
 
 

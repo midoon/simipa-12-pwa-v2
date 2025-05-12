@@ -56,7 +56,7 @@
         }
 
         function batal() {
-            window.location.href = '/teacher/dashboard';
+            window.location.href = '/';
         }
     </script>
 </x-layout>

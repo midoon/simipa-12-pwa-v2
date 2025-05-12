@@ -67,7 +67,7 @@
         }
 
         function cancelCreate() {
-            window.location.href = '/teacher/dashboard';
+            window.location.href = '/';
         }
 
         document.querySelector('.submit-attendance-btn').addEventListener('click', function() {
@@ -110,7 +110,7 @@
                 .then(data => {
                     alert(data.message); // Tampilkan pesan sukses
                     // redirect ke halaman lihat presensi dengan filter tertentu
-                    window.location.href = '/teacher/dashboard';
+                    window.location.href = '/';
                 })
                 .catch(error => {
                     console.error('Error:', error);

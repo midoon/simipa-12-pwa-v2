@@ -61,7 +61,7 @@
         }
 
         function cancelCreate() {
-            window.location.href = '/teacher/dashboard';
+            window.location.href = '/';
         }
 
         function confirmEdit() {
@@ -104,7 +104,7 @@
                     alert(data.message); // Tampilkan pesan sukses
                     // console.log(data);
                     // redirect ke halaman lihat presensi dengan filter tertentu
-                    // window.location.href = '/teacher/dashboard';
+                    // window.location.href = '/';
 
                 })
                 .catch(error => {
@@ -144,7 +144,7 @@
                     alert(data.message); // Tampilkan pesan sukses
                     // console.log(data);
                     // redirect ke halaman lihat presensi dengan filter tertentu
-                    window.location.href = '/teacher/dashboard';
+                    window.location.href = '/';
                 })
                 .catch(error => {
                     console.error('Error:', error);

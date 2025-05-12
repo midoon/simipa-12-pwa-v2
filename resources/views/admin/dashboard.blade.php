@@ -1,17 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=h1, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-
-    @vite(['resources/js/app.js', 'resources/css/app.css'])
-    <title>Admin | Dashboard</title>
-</head>
-
-<body>
+<x-layout>
+    <x-slot:title>Dashboard | Admin</x-slot:title>
     <x-navbar-admin>
         <!-- Header -->
         <header class="flex items-center justify-between bg-white p-6">
@@ -71,7 +59,4 @@
             document.getElementById(id).classList.toggle('hidden');
         }
     </script>
-
-</body>
-
-</html>
+</x-layout>

@@ -3,6 +3,6 @@ UPCOMING FEATURE:
 
 NEED IMPROVE:
 - security for https request meta tag: <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-
+- jika pakai tag tersebut, jika di server masih http, cssnya tidak terbaca dan harus https
 
 

@@ -1,8 +1,17 @@
 UPCOMING FEATURE:
 - [admin] : on Delete Cascede with multi confirmation
+- [admin-schedule]: pagination
+- [teacher-payment]: tipe pembayaran hanya berdasarkan kelas yang dipilih: contoh kelas 2 hanya akan muncul tipe pemayaran yang untuk kelas 2 saja
+- [kwitansi]: bendahara dapat mencetak kwitansi ketika siswa sudah lunas, dan nomor kwitansi urut dengan no kwitansi terbit.
+- [teacher-attendance]: teacher hanya bisa absen di kelas yang terassign di jadwal
 
 NEED IMPROVE:
 - security for https request meta tag: <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 - jika pakai tag tersebut, jika di server masih http, cssnya tidak terbaca dan harus https
+
+
+BUG:
+rename error message in delete action admin
+
 
 

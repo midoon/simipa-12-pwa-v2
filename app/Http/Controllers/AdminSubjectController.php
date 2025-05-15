@@ -71,7 +71,7 @@ class AdminSubjectController extends Controller
         try {
             $exisData = [];
             if (DB::table('schedules')->where('subject_id', $subjectId)->exists()) {
-                array_push($existData, 'tagihan');
+                array_push($existData, 'jadwal');
             }
             if (count($exisData) != 0) {
                 return back()->withErrors(['Siswa' => "siswa yang ingin anda hapus masih digunakan di data " . implode(", ", $existData)]);

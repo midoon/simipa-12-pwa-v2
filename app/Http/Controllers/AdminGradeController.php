@@ -61,7 +61,7 @@ class AdminGradeController extends Controller
             }
 
             if (DB::table('subjects')->where('grade_id', $kelasId)->exists()) {
-                array_push($existData, 'rombel');
+                array_push($existData, 'mata pelajaran');
             }
 
             if (count($existData) != 0) {

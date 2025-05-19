@@ -13,5 +13,9 @@ NEED IMPROVE:
 BUG:
 rename error message in delete action admin
 
-
-
+REFACTORE:
+- DB schema for subject, atribute just name, not inlcude grade
+- [teacher shceule]: shorting by TIME ASC
+- student => order by ASC
+- Akses guru => melihat daftar tagihan
+- Teacher -> lihat tagihan => jika lunas kasih indikator hijau

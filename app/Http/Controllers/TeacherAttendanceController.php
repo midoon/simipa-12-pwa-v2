@@ -16,8 +16,11 @@ class TeacherAttendanceController extends Controller
     public function filterRead()
     {
         try {
-            $activities = Activity::all();
-            $groups = Group::all();
+            $teacherId = session('teacher')['teacherId'];
+            $activities = Activity::orderBy('name')->get();
+            $groups = Group::whereHas('schedules', function ($query) use ($teacherId) {
+                $query->where('teacher_id', $teacherId);
+            })->orderBy('name')->get();
             return view('staff.teacher.attendance.filter_read', ['activities' => $activities, 'groups' => $groups]);
         } catch (Exception $e) {
             return back()->withErrors(['error' => "Terjadi kesalahan saat memuat data: {$e->getMessage()}"]);
@@ -50,8 +53,11 @@ class TeacherAttendanceController extends Controller
     public function filterCreate()
     {
         try {
-            $activities = Activity::all();
-            $groups = Group::all();
+            $teacherId = session('teacher')['teacherId'];
+            $activities = Activity::orderBy('name')->get();
+            $groups = Group::whereHas('schedules', function ($query) use ($teacherId) {
+                $query->where('teacher_id', $teacherId);
+            })->orderBy('name')->get();
             return view('staff.teacher.attendance.filter_create', ['activities' => $activities, 'groups' => $groups]);
         } catch (Exception $e) {
             return back()->withErrors(['error' => "Terjadi kesalahan saat memuat data: {$e->getMessage()}"]);
@@ -79,7 +85,7 @@ class TeacherAttendanceController extends Controller
 
             $group = DB::table('groups')->where('id', $request->group_id)->get();
             $activity = DB::table('activities')->where('id', $request->activity_id)->get();
-            $students = DB::table('students')->where('group_id', $request->group_id)->get();
+            $students = DB::table('students')->where('group_id', $request->group_id)->orderBy('name')->get();
             return view('staff.teacher.attendance.create', ['students' => $students, 'group' => $group, 'activity' => $activity, 'day' => $request->day]);
         } catch (Exception $e) {
             return back()->withErrors(['error' => "Terjadi kesalahan saat menambah data: {$e->getMessage()}"]);
@@ -145,8 +151,11 @@ class TeacherAttendanceController extends Controller
     public function filterReport()
     {
         try {
-            $activities = Activity::all();
-            $groups = Group::all();
+            $teacherId = session('teacher')['teacherId'];
+            $activities = Activity::orderBy('name')->get();
+            $groups = Group::whereHas('schedules', function ($query) use ($teacherId) {
+                $query->where('teacher_id', $teacherId);
+            })->orderBy('name')->get();
             return view('staff.teacher.attendance.filter_report', ['activities' => $activities, 'groups' => $groups]);
         } catch (Exception $e) {
             return back()->withErrors(['error' => "Terjadi kesalahan saat memuat data: {$e->getMessage()}"]);

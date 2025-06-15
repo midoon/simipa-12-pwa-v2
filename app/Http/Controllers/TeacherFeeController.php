@@ -12,7 +12,7 @@ class TeacherFeeController extends Controller
     public function filterRead()
     {
         try {
-            $groups = Group::all();
+            $groups = Group::orderBy('name', 'asc')->get();
             return view('staff.teacher.fee.filter_read', compact('groups'));
         } catch (Exception $e) {
             return back()->with('error', $e->getMessage());
@@ -37,7 +37,7 @@ class TeacherFeeController extends Controller
                 return back()->with('error', 'Group tidak ditemukan');
             }
 
-            $students = $group->students;
+            $students = $group->students->sortBy('name');
             $studentFee = [];
 
             foreach ($students as $student) {

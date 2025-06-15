@@ -19,8 +19,8 @@ class TeacherPaymentController extends Controller
     public function filterCreate()
     {
         try {
-            $paymentTypes = PaymentType::all();
-            $groups = Group::all();
+            $paymentTypes = PaymentType::orderby('name')->get();
+            $groups = Group::orderBy('name')->get();
             return view('staff.teacher.payment.filter_create', ['paymentTypes' => $paymentTypes, 'groups' => $groups]);
         } catch (Exception $e) {
             return back()->withErrors(['error' => "Terjadi kesalahan saat memuat data: {$e->getMessage()}"]);
@@ -41,7 +41,7 @@ class TeacherPaymentController extends Controller
             }
 
             $group = Group::find($request->group_id);
-            $students = $group->students;
+            $students = $group->students->sortBy('name');
             $paymentType = PaymentType::find($request->payment_type_id);
             $groupId = $group->id; // perlu?
             $fees = Fee::whereHas('student.group', function ($query) use ($groupId) {
@@ -133,8 +133,8 @@ class TeacherPaymentController extends Controller
     public function filterRead()
     {
         try {
-            $paymentTypes = PaymentType::all();
-            $groups = Group::all();
+            $paymentTypes = PaymentType::orderby('name')->get();
+            $groups = Group::orderBy('name')->get();
             return view('staff.teacher.payment.filter_read', ['paymentTypes' => $paymentTypes, 'groups' => $groups]);
         } catch (Exception $e) {
             return back()->withErrors(['error' => "Terjadi kesalahan saat memuat data: {$e->getMessage()}"]);
@@ -154,7 +154,7 @@ class TeacherPaymentController extends Controller
             }
 
             $group = Group::find($request->group_id);
-            $students = $group->students;
+            $students = $group->students->sortBy('name');
             $paymentType = PaymentType::find($request->payment_type_id);
 
             return view('staff.teacher.payment.read', ['students' => $students, 'group' => $group, 'paymentType' => $paymentType]);
@@ -237,8 +237,8 @@ class TeacherPaymentController extends Controller
     public function filterReport()
     {
         try {
-            $paymentTypes = PaymentType::all();
-            $groups = Group::all();
+            $paymentTypes = PaymentType::orderby('name')->get();
+            $groups = Group::orderBy('name')->get();
             return view('staff.teacher.payment.filter_report', ['paymentTypes' => $paymentTypes, 'groups' => $groups]);
         } catch (Exception $e) {
             return back()->withErrors(['error' => "Terjadi kesalahan saat memuat data: {$e->getMessage()}"]);
@@ -266,7 +266,7 @@ class TeacherPaymentController extends Controller
                 return back()->withErrors(['error' => "Tidak terdapat pembayaran pada kategori tersebut"]);
             }
             $feeAmount = $feeGroup->amount;
-            $students = $group->students;
+            $students = $group->students->sortBy('name');
             $paymentType = PaymentType::find($request->payment_type_id);
             $groupId = $request->group_id;
             $fees = Fee::whereHas('student.group', function ($query) use ($groupId) {

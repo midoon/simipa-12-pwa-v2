@@ -15,8 +15,8 @@ class AdminPaymentTypeController extends Controller
     public function index()
     {
         try {
-            $paymentTypes = PaymentType::all();
-            $grades = Grade::all();
+            $paymentTypes = PaymentType::orderby('name')->get();
+            $grades = Grade::orderby('name')->get();
             $gradeFees = GradeFee::all();
             return view('admin.payment.index', ['paymentTypes' => $paymentTypes, 'grades' => $grades, 'gradeFees' => $gradeFees]);
         } catch (Exception $e) {

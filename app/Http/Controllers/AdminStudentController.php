@@ -41,11 +41,17 @@ class AdminStudentController extends Controller
             });
 
             // Eksekusi query
-            $students = $studentsQuery->paginate(40)->appends(request()->query());
+            $students = $studentsQuery
+                ->join('groups', 'students.group_id', '=', 'groups.id')
+                ->orderBy('groups.name', 'asc')
+                ->orderBy('students.name', 'asc')
+                ->select('students.*')
+                ->paginate(20)
+                ->withQueryString();
 
             // Ambil data groups dan grades
-            $groups = Group::all();
-            $grades = Grade::all();
+            $groups = Group::orderBy('name')->get();
+            $grades = Grade::orderBy('name')->get();
 
             // Tampilkan view
             return view('admin.student.index', [

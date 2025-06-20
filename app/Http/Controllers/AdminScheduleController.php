@@ -38,10 +38,14 @@ class AdminScheduleController extends Controller
                 });
             });
 
-            $schedules = $scheduleQuery->get();
-            $teachers = Teacher::all();
-            $groups = Group::all();
-            $subjects = Subject::all();
+            $schedules = $scheduleQuery
+                ->orderByRaw("FIELD(day_of_week, 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu')")
+                ->orderBy('start_time')
+                ->paginate(10)
+                ->withQueryString();
+            $teachers = Teacher::orderBy('name')->get();
+            $groups = Group::orderBy('name')->get();
+            $subjects = Subject::orderBy('name')->get();
             return view('admin.schedule.index', ['schedules' => $schedules, 'teachers' => $teachers, 'groups' => $groups, 'subjects' => $subjects]);
         } catch (Exception $e) {
             return back()->withErrors(['error' => "Terjadi kesalahan saat memuat data: {$e->getMessage()}"]);

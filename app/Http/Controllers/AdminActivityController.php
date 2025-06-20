@@ -12,7 +12,7 @@ class AdminActivityController extends Controller
 {
     public function index()
     {
-        $activities = Activity::all();
+        $activities = Activity::orderby('name')->get();
         return view('admin.activity.index', ['activities' => $activities]);
     }
 

@@ -24,10 +24,16 @@ class AdminFeeController extends Controller
                 $gradeFeeQuery->where('payment_type_id', $query['payment_type_id']);
             }
 
-            $gradeFees = $gradeFeeQuery->paginate(6)->appends(request()->query());
+            $gradeFees = $gradeFeeQuery
+                ->join('grades', 'grade_fees.grade_id', '=', 'grades.id')
+                ->select('grade_fees.*')
+                ->orderBy('grades.name', 'asc')
+                ->orderBy('grade_fees.due_date', 'asc')
+                ->paginate(10)
+                ->withQueryString();
 
-            $paymentTypes = PaymentType::all();
-            $grades = Grade::all();
+            $paymentTypes = PaymentType::orderBy('name', 'asc')->get();
+            $grades = Grade::orderBy('name', 'asc')->get();
 
             return view('admin.fee.index', ['paymentTypes' => $paymentTypes, 'grades' => $grades, 'gradeFees' => $gradeFees]);
         } catch (Exception $e) {

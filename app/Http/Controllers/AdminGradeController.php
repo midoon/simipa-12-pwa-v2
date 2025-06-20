@@ -16,7 +16,7 @@ class AdminGradeController extends Controller
     {
         try {
 
-            $grades = Grade::all();
+            $grades = Grade::orderBy('name')->get();
             return view('admin.grade.index', [
 
                 'grades' => $grades

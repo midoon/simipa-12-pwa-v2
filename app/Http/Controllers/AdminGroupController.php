@@ -22,8 +22,8 @@ class AdminGroupController extends Controller
                 $groupsQuery->where('grade_id', $query['grade_id']);
             }
 
-            $groups = $groupsQuery->paginate(6)->appends(request()->query());
-            $grades = Grade::all();
+            $groups = $groupsQuery->orderBy('name')->paginate(6)->appends(request()->query());
+            $grades = Grade::orderBy('name')->get();
             return view('admin.group.index', [
                 'groups' => $groups,
                 'grades' => $grades

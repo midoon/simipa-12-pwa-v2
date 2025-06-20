@@ -14,7 +14,10 @@ class AdminTeacherController extends Controller
     public function index()
     {
 
-        $teachers = Teacher::paginate(10);
+        $teachers = Teacher::query()
+            ->orderBy('name')
+            ->paginate(20)
+            ->withQueryString();
         return view('admin.teacher.index', ['teachers' => $teachers]);
     }
 

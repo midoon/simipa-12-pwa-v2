@@ -28,7 +28,7 @@ class AdminSubjectController extends Controller
             });
 
             $subjects = $subjectQuery->get();
-            $grades = Grade::all();
+            $grades = Grade::orderBy('name')->get();
             return view('admin.subject.index', ['grades' => $grades, 'subjects' => $subjects]);
         } catch (Exception $e) {
             return back()->withErrors(['error' => "Terjadi kesalahan saat memuat data: {$e->getMessage()}"]);

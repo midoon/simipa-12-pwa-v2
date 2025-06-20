@@ -77,11 +77,11 @@ class TeacherAttendanceController extends Controller
                 return back()->withErrors($validator);
             }
 
-            $paymentIsCreated = DB::table('attendances')->where('group_id', $request->group_id)->where('activity_id', $request->activity_id)->where('day', $request->day)->count() > 0;
+            // $paymentIsCreated = DB::table('attendances')->where('group_id', $request->group_id)->where('activity_id', $request->activity_id)->where('day', $request->day)->count() > 0;
 
-            if ($paymentIsCreated) {
-                return back()->withErrors(['error' => 'Presensi untuk kegiatan dan hari tersebut sudah dibuat!']);
-            }
+            // if ($paymentIsCreated) {
+            //     return back()->withErrors(['error' => 'Presensi untuk kegiatan dan hari tersebut sudah dibuat!']);
+            // }
 
             $group = DB::table('groups')->where('id', $request->group_id)->get();
             $activity = DB::table('activities')->where('id', $request->activity_id)->get();
@@ -96,6 +96,12 @@ class TeacherAttendanceController extends Controller
     {
         try {
             $presensi = $request->input('presensi');
+
+            $paymentIsCreated = DB::table('attendances')->where('group_id', $presensi[0]['group_id'])->where('activity_id', $presensi[0]['activity_id'])->where('day', $presensi[0]['day'])->count() > 0;
+
+            if ($paymentIsCreated) {
+                return response()->json(['message' => 'Presensi untuk kegiatan dan hari tersebut sudah dibuat!']);
+            }
 
             foreach ($presensi as $data) {
                 Attendance::create([

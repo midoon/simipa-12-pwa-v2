@@ -50,7 +50,7 @@ class AdminGroupController extends Controller
                 'grade_id' => $request->grade_id,
                 'name' => $request->name
             ]);
-            return redirect('/admin/grade');
+            return redirect('/admin/group');
         } catch (QueryException $e) {
             if ($e->errorInfo[1] == 1062) //kode mysql untuk duplicate data
             {
@@ -81,7 +81,7 @@ class AdminGroupController extends Controller
             }
 
             DB::table('groups')->delete($groupId);
-            return redirect('/admin/grade');
+            return redirect('/admin/group');
         } catch (Exception $e) {
             $env = config('app.env');
             // Jika di production, tampilkan pesan error umum
@@ -112,7 +112,7 @@ class AdminGroupController extends Controller
                 'name' => $request->name,
                 'grade_id' => $request->grade_id
             ]);
-            return redirect('/admin/grade');
+            return redirect('/admin/group');
         } catch (QueryException $e) {
             if ($e->errorInfo[1] == 1062) //kode mysql untuk duplicate data
             {

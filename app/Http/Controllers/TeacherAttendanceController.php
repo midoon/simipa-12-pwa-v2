@@ -115,7 +115,11 @@ class TeacherAttendanceController extends Controller
 
             return response()->json(['message' => 'Presensi berhasil disimpan!']);
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Terjadi kesalahan: ' . $e->getMessage()], 500);
+            $message = "Terjadi kesalahan: " . $e->getMessage();
+            if (!$presensi) {
+                $message = "Tidak ada daftar siswa";
+            }
+            return response()->json(['message' => $message], 500);
         }
     }
 
